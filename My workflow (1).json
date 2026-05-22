@@ -1,0 +1,141 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8b6571fb-c69c-4ee6-8c28-b553e17424a3",
+      "name": "When chat message received",
+      "webhookId": "87762d15-f01d-4fa0-aa6f-2c7b358af8cd"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "9c23b4d2-5351-42c3-afed-97ef8165b538",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        208,
+        320
+      ],
+      "id": "fe205441-0d01-4b59-a5b3-90df2c88af16",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "additionalFields": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-serpapi.serpApiTool",
+      "typeVersion": 1,
+      "position": [
+        368,
+        208
+      ],
+      "id": "e8f867b5-08d2-4368-a25c-f36479e5b55b",
+      "name": "Google search in SerpApi",
+      "credentials": {
+        "serpApi": {
+          "id": "cxUgTMRHWUQwBsmj",
+          "name": "SerpApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "dfb78b93-91ce-48f0-8848-2f31bf8f8464",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "qec0GZy8eNGB4P4k",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google search in SerpApi": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "18c77550-2f82-4bd6-ae9c-19d875e7595b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "37692d4df36c8b3d766785b2f53901de58abb820698752fa0116e7b2c1051014"
+  },
+  "id": "2KoYfQkCKmDCb9Tz",
+  "tags": []
+}
